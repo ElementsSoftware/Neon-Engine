@@ -1,14 +1,24 @@
-#include <Neon/Renderer/ModuleManager.hpp>
-
 #include <iostream>
+
+#include <Neon/Renderer/ModuleManager.hpp>
+#include <Neon/Renderer/Window.hpp>
+#include <Neon/Renderer/Renderer.hpp>
+#include <Neon/Renderer/Device.hpp>
 
 namespace Ne
 {
+	ModuleManager::ModuleManager()
+	{
+		Add<Window>(ModuleList::WINDOW);
+		Add<Renderer>(ModuleList::RENDERER);
+		Add<Device>(ModuleList::DEVICE);
+	}
+
 	/*
 	  @brief : Add a module to the list of module
 	  @param : The name of module
 	  @param : A pointer to the module
-	 */
+	*/
 	void ModuleManager::Add(ModuleList moduleName, Module* module)
 	{
 		if (Contains(moduleName))
@@ -20,7 +30,7 @@ namespace Ne
 	/*
 	  @brief : Remove a module from the list of module
 	  @param : The name of module to remove
-	 */
+	*/
 	void ModuleManager::Remove(ModuleList moduleName)
 	{
 		for (auto it = m_moduleManager.begin(); it != m_moduleManager.end(); it++)
@@ -29,21 +39,6 @@ namespace Ne
 				m_moduleManager.erase(it->first);
 				break;
 			}	
-	}
-
-	/*
-	@brief : Get a pointer to a module
-	@param : The module name to get
-	@return : A pointer to the module
-	@note : If the module is not in the list this functions return nullptr
-	*/
-	Module* ModuleManager::GetModule(ModuleList name)
-	{
-		for (auto it = m_moduleManager.begin(); it != m_moduleManager.end(); it++)
-			if (it->first == name)
-				return (it->second);
-
-		return nullptr;
 	}
 
 	/*
@@ -61,6 +56,4 @@ namespace Ne
 
 		return false;
 	}
-
-
 }

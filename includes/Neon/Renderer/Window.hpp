@@ -4,21 +4,32 @@
 #include <iostream>
 
 #include <Neon/Renderer/Module.hpp>
+#include <Neon/Core/String.hpp>
+#include <GLFW/glfw3.h>
 
 namespace Ne
 {
-	class Window : public Module
+	class NEON_API Window : public Module
 	{
 	public :
-		void Create()
-		{
-			std::cout << "Create" << std::endl;
-		}
 
-		void Update() override
-		{
-			std::cout << "Update" << std::endl;
-		}
+		Window() = default;
+		Window(int width, int height, const String& title);
+
+		~Window();
+
+		bool Create(int width, int height, const String& title);
+
+	private:
+		bool CreateSurface();
+	
+	private:
+		int m_width;
+		int m_height;
+		String m_title;
+
+		GLFWwindow * m_window;
+		VkSurfaceKHR m_surface;
 	};
 }
 

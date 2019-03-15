@@ -2,6 +2,7 @@
 #define MODULE_HPP
 
 #include <Neon/Utils.hpp>
+#include <VEZ.h>
 
 namespace Ne
 {
@@ -9,8 +10,7 @@ namespace Ne
 	{
 		WINDOW,
 		RENDERER,
-		LOGICAL,
-		PHYSICAL
+		DEVICE
 	};
 
 	class NEON_API Module
@@ -21,8 +21,6 @@ namespace Ne
 
 		Module(const Module&) = delete;
 		Module& operator=(const Module&) = delete;
-
-		virtual void Update() = 0;
 	};
 }
 

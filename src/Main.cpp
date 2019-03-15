@@ -11,12 +11,13 @@ using namespace Ne;
 
 int main(void)
 {
-	std::unique_ptr<ModuleManager> mm = std::make_unique<ModuleManager>();
-	std::unique_ptr<Window> window = std::make_unique<Window>();
+	std::unique_ptr<Window> window = std::make_unique<Window>(500, 500, "Test");
+	
+	ModuleManager mm = ModuleManager::GetInstance();
 
-	mm->Add(ModuleList::WINDOW, window.get());
+	mm.Add(ModuleList::WINDOW, window.get());
 
-	mm->GetModule(ModuleList::WINDOW)->Update();
+	mm.Get<Window>()->Create(500, 500, "Test");
 
 	system("PAUSE");
 

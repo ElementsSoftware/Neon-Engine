@@ -11,18 +11,28 @@ namespace Ne
 	class NEON_API ModuleManager
 	{
 	public:
-		ModuleManager() = default;
+		ModuleManager();
 
 	    void Add(ModuleList moduleName, Module* module);
+
 		void Remove(ModuleList moduleName);
 
-		Module* GetModule(ModuleList moduleName);
-
 		bool Contains(ModuleList moduleName);
+
+		inline static ModuleManager& GetInstance();
+
+		template <typename T>
+		inline T* Get() const;
+
+	private:
+		template <typename T>
+		inline void Add(ModuleList moduleName);
 
 	private:
 		std::map<ModuleList, Module*> m_moduleManager;
 	};
 }
+
+#include "ModuleManager.inl"
 
 #endif
